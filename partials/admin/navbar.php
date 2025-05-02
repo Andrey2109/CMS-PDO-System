@@ -16,16 +16,19 @@
             id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="admin.html">Dashboard</a>
+                    <a class="nav-link active" aria-current="page" href="admin.php">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="create-article.html">Create Article</a>
+                    <a class="nav-link" href="create-article.php">Create Article</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">View Site</a>
+                    <a class="nav-link" href="index.php">View Site</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Logout</a>
+                    <a class="nav-link" href="profile.php">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.php">Logout</a>
                 </li>
             </ul>
         </div>
