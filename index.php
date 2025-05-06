@@ -5,6 +5,7 @@ include "./partials/hero.php";
 
 $db = new Database;
 $db->getConnection();
+var_dump($db);
 ?>
 
 <main class="container my-5">
