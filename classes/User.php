@@ -27,4 +27,18 @@ class User
 
         return false;
     }
+
+    public function login($email, $password)
+    {
+        $query = "SELECT * FROM " . $this->table . " WHERE email = :email AND password =:password";
+        $stmt = $this->conn->prepare($query);
+        $realPassword = password_verify($password, PASSWORD_BCRYPT);
+
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $realPassword);
+
+        $result = $stmt->execute();
+
+        return $result;
+    }
 }
