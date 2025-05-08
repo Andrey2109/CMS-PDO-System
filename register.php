@@ -2,6 +2,20 @@
 include "./partials/header.php";
 include "./partials/navbar.php";
 include "./partials/hero.php";
+
+if (isPostRequest()) {
+    $username = getPostData('username');
+    $email = getPostData('email');
+    $password = getPostData('paswword');
+    $confirm_password = getPostData('confirm_password');
+
+    $user =  new User;
+    if ($user->register($username, $email, $password)) {
+        redirect('login.php');
+    } else {
+        echo "Registration Failed";
+    }
+}
 ?>
 
 <!-- Main Content -->
@@ -9,13 +23,14 @@ include "./partials/hero.php";
     <h2 class="text-center mb-4">Register</h2>
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <form action="welcome.html" method="post">
+            <form action="" method="post">
                 <div class="mb-3">
-                    <label for="name" class="form-label">Full Name *</label>
+                    <label for="username" class="form-label">Username *</label>
                     <input
                         type="text"
                         class="form-control"
-                        id="name"
+                        id="username"
+                        name="username"
                         required>
                 </div>
                 <div class="mb-3">
@@ -24,6 +39,7 @@ include "./partials/hero.php";
                         type="email"
                         class="form-control"
                         id="email"
+                        name="email"
                         required>
                 </div>
                 <div class="mb-3">
@@ -32,6 +48,7 @@ include "./partials/hero.php";
                         type="password"
                         class="form-control"
                         id="password"
+                        name="password"
                         required>
                 </div>
                 <div class="mb-3">
@@ -40,6 +57,7 @@ include "./partials/hero.php";
                         type="password"
                         class="form-control"
                         id="confirm-password"
+                        name="confirm_password"
                         required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Register</button>
