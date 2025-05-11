@@ -1,11 +1,11 @@
 <?php
-include "./partials/header.php";
-include "./partials/navbar.php";
-include "./partials/hero.php";
+require_once "./partials/header.php";
+include basepath("./partials/navbar.php");
+include basepath("./partials/hero.php");
 
 $db = new Database;
 $db->getConnection();
-var_dump($db);
+// var_dump($db);
 ?>
 
 <main class="container my-5">

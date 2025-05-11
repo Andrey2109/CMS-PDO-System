@@ -30,15 +30,20 @@ class User
 
     public function login($email, $password)
     {
-        $query = "SELECT * FROM " . $this->table . " WHERE email = :email AND password =:password";
+        $query = "SELECT * FROM " . $this->table . " WHERE email = :email";
         $stmt = $this->conn->prepare($query);
-        $realPassword = password_verify($password, PASSWORD_BCRYPT);
-
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $realPassword);
 
         $result = $stmt->execute();
+        if ($result) {
+            if ($user = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                // var_dump($user);
+                if (password_verify($password, $user['password'])) {
+                    return true;
+                }
+            }
+        }
 
-        return $result;
+        return false;
     }
 }

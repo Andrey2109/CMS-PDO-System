@@ -6,7 +6,7 @@ include "./partials/hero.php";
 if (isPostRequest()) {
     $username = getPostData('username');
     $email = getPostData('email');
-    $password = getPostData('paswword');
+    $password = getPostData('password');
     $confirm_password = getPostData('confirm_password');
 
     $user =  new User;

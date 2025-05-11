@@ -8,9 +8,15 @@ if (isPostRequest()) {
     $password = getPostData('password');
 
     $user =  new User;
-    echo $user->login($email, $password);
+    if ($user->login($email, $password)) {
+        redirect('admin.php');
+    }
 }
+
 ?>
+<?php if (!empty($loginError)): ?>
+    <div class="alert alert-danger"><?php echo $loginError; ?></div>
+<?php endif; ?>
 
 <!-- Main Content -->
 <main class="container my-5">
@@ -21,7 +27,7 @@ if (isPostRequest()) {
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address *</label>
                     <input
-                        name="email" ;
+                        name="email"
                         type="email"
                         class="form-control"
                         id="email"
@@ -30,7 +36,7 @@ if (isPostRequest()) {
                 <div class="mb-3">
                     <label for="password" class="form-label">Password *</label>
                     <input
-                        name="password" ;
+                        name="password"
                         type="password"
                         class="form-control"
                         id="password"
