@@ -27,4 +27,11 @@ class Article
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
+    public function get_article($id)
+    {
+        $query = 'SELECT * FROM ' . $this->table . " WHERE id = $id ORDER BY id DESC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
 }

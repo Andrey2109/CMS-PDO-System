@@ -9,9 +9,9 @@ $db->getConnection();
 
 $article_obj = new Article;
 $articles = $article_obj->get_all();
-echo "<pre>";
-var_dump($articles);
-echo "</pre>";
+// echo "<pre>";
+// var_dump($articles);
+// echo "</pre>";
 ?>
 
 <main class="container my-5">
@@ -37,9 +37,9 @@ echo "</pre>";
                 <div class="col-md-8">
                     <h2><?= htmlspecialchars($article->title) ?></h2>
                     <p>
-                        <?= $article_obj->getProperLength($article->content) ?>
+                        <?= htmlspecialchars($article_obj->getProperLength($article->content)) ?>
                     </p>
-                    <a href="article.php" class="btn btn-primary">Read More</a>
+                    <a href="article.php?id=<?php echo $article->id ?>" class="btn btn-primary">Read More</a>
                 </div>
             </div>
         <?php endforeach; ?>
