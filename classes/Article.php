@@ -27,11 +27,16 @@ class Article
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
-    public function get_article($id)
+    public function get_article_by_id($id)
     {
-        $query = 'SELECT * FROM ' . $this->table . " WHERE id = $id ORDER BY id DESC";
+        $query = 'SELECT * FROM ' . $this->table . " WHERE id = :id LIMIT 1";
         $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
+        $article = $stmt->fetch(PDO::FETCH_OBJ);
+        if ($article) {
+            return $article;
+        }
+        return false;
     }
 }
