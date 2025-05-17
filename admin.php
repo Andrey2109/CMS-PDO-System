@@ -2,11 +2,9 @@
 include "./partials/admin/header.php";
 include "./partials/admin/navbar.php";
 
-$user = new User();
+isLoggedIn();
 $article_obj = new Article();
-if (!$user->isLoggedIn()) {
-    redirect('login.php');
-}
+
 
 $user_articles = $article_obj->getArticlesbyUser($_SESSION['user_id']);
 // var_dump($user_articles);

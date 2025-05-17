@@ -56,3 +56,14 @@ function formatCreatedAt($date)
 {
     return date('F j, Y', strtotime($date));
 }
+
+function isLoggedIn()
+{
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    if (!isset($_SESSION['user_id'])) {
+        redirect('login.php');
+    }
+}
