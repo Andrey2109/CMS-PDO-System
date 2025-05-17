@@ -3,10 +3,13 @@ include "./partials/admin/header.php";
 include "./partials/admin/navbar.php";
 
 $user = new User();
-
+$article_obj = new Article();
 if (!$user->isLoggedIn()) {
     redirect('login.php');
 }
+
+$user_articles = $article_obj->getArticlesbyUser($_SESSION['user_id']);
+// var_dump($user_articles);
 
 ?>
 
@@ -28,20 +31,21 @@ if (!$user->isLoggedIn()) {
                 </tr>
             </thead>
             <tbody>
-                <!-- Example Article Row -->
-                <tr>
-                    <td>1</td>
-                    <td>Article Title 1</td>
-                    <td>Edwin Diaz</td>
-                    <td>January 1, 2045</td>
-                    <td>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus feugiat elit vitae enim lacinia semper...
-                    </td>
-                    <td>
-                        <a href="edit-article.html?id=1" class="btn btn-sm btn-primary me-1">Edit</a>
-                        <button class="btn btn-sm btn-danger" onclick="confirmDelete(1)">Delete</button>
-                    </td>
-                </tr>
+                <?php foreach ($user_articles as $article): ?>
+                    <tr>
+                        <td><?= $article->id ?></td>
+                        <td><?= $article->title ?></td>
+                        <td><?= $article->first_name . ' ' . $article->last_name ?></td>
+                        <td><?= $article_obj->formatCreatedAt($article->created_at) ?></td>
+                        <td>
+                            <?= $article_obj->getProperLength($article->content)  ?>
+                        </td>
+                        <td>
+                            <a href="edit-article.html?id=<?= $article->id ?>" class="btn btn-sm btn-primary me-1">Edit</a>
+                            <button class="btn btn-sm btn-danger" onclick="confirmDelete(1)">Delete</button>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
                 <!-- Additional Article Rows -->
                 <tr>
                     <td>2</td>

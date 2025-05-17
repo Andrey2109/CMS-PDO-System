@@ -63,6 +63,28 @@ class Article
         return false;
     }
 
+    public function getArticlesbyUser($id)
+    {
+        $query = 'SELECT 
+                articles.id,
+                articles.title,
+                articles.content,
+                articles.created_at,
+                users.first_name AS first_name,
+                users.last_name AS last_name
+         FROM ' . $this->table .
+            " JOIN users ON articles.user_id = users.id" .
+            " WHERE articles.user_id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $article = $stmt->fetchAll(PDO::FETCH_OBJ);
+        if ($article) {
+            return $article;
+        }
+        return false;
+    }
+
     public function formatCreatedAt($date)
     {
         return date('F j, Y', strtotime($date));
