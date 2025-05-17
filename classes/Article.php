@@ -39,4 +39,32 @@ class Article
         }
         return false;
     }
+
+    public function get_article_with_owner_by_id($id)
+    {
+        $query = 'SELECT 
+                articles.id,
+                articles.title,
+                articles.content,
+                articles.created_at,
+                articles.image,
+                users.username AS author,
+                users.email AS author_email
+         FROM ' . $this->table .
+            " JOIN users ON articles.user_id = users.id" .
+            " WHERE articles.id = :id LIMIT 1";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $article = $stmt->fetch(PDO::FETCH_OBJ);
+        if ($article) {
+            return $article;
+        }
+        return false;
+    }
+
+    public function formatCreatedAt($date)
+    {
+        return date('F j, Y', strtotime($date));
+    }
 }

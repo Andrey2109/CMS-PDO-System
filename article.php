@@ -10,7 +10,7 @@ $db->getConnection();
 // var_dump($db);
 $articleId = isset($_GET['id']) ? (int)$_GET['id'] : null;
 $article_obj = new Article;
-$article = $article_obj->get_article_by_id($articleId);
+$article = $article_obj->get_article_with_owner_by_id($articleId);
 // echo "<pre>";
 // var_dump($article);
 // echo "</pre>";
@@ -33,9 +33,21 @@ $article = $article_obj->get_article_by_id($articleId);
 
         <?php endif; ?>
     </div>
+    <section>
+        <div class="container">
+            <h1 class="display-4"><?= $article->title; ?></h1>
+            <small>
+                By <a href=""><?= $article->author; ?></a>
+                <span>Published on <?= $article_obj->formatCreatedAt($article->created_at);  ?></span>
+            </small>
+        </div>
+    </section>
+
     <!-- Article Content -->
     <article>
-        <?= htmlspecialchars($article->content) ?>
+        <div class="container my-5">
+            <?= htmlspecialchars($article->content) ?>
+        </div>
     </article>
 
     <!-- Comments Section Placeholder -->

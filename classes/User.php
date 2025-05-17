@@ -39,6 +39,9 @@ class User
             if ($user = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 // var_dump($user);
                 if (password_verify($password, $user['password'])) {
+                    $_SESSION['logged_in'] = true;
+                    $_SESSION['username'] = $user->username;
+                    $_SESSION['email'] = $user->email;
                     return true;
                 }
             }
