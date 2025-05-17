@@ -1,5 +1,7 @@
 <?php
 include __DIR__ .  '/../../init.php';
+isLoggedIn();
+
 ?>
 
 <!DOCTYPE html>

@@ -2,7 +2,6 @@
 include "./partials/admin/header.php";
 include "./partials/admin/navbar.php";
 
-isLoggedIn();
 $article_obj = new Article();
 
 
