@@ -51,3 +51,8 @@ function getPostData($field, $default = null)
 {
     return isset($_POST[$field]) ? trim($_POST[$field]) : $default;
 }
+
+function formatCreatedAt($date)
+{
+    return date('F j, Y', strtotime($date));
+}
