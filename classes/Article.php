@@ -89,4 +89,17 @@ class Article
     {
         return date('F j, Y', strtotime($date));
     }
+
+    public function cretaeArticle($title, $content, $image, $id)
+    {
+        $query = 'INSERT INTO ' . $this->table .
+            ' title, content, image, user_id' .
+            ' VALUES (:title, :content, :image, :id)';
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':content', $content);
+        $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':id', $id);
+    }
 }

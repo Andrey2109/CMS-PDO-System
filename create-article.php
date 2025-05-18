@@ -3,7 +3,9 @@ include "./partials/admin/header.php";
 include "./partials/admin/navbar.php";
 
 if (isPostRequest()) {
-    var_dump("OK");
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+    $image = $_POST['image'];
 }
 
 ?>
@@ -14,10 +16,6 @@ if (isPostRequest()) {
         <div class="mb-3">
             <label for="title" class="form-label">Article Title *</label>
             <input name="title" type="text" class="form-control" id="title" placeholder="Enter article title" required>
-        </div>
-        <div class="mb-3">
-            <label for="author" class="form-label">Author *</label>
-            <input name="author" type="text" class="form-control" id="author" placeholder="Enter author name" required>
         </div>
         <div class="mb-3">
             <label for="date" class="form-label">Published Date *</label>
