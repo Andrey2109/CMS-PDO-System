@@ -90,16 +90,23 @@ class Article
         return date('F j, Y', strtotime($date));
     }
 
-    public function cretaeArticle($title, $content, $image, $id)
+    public function createArticle($title, $content, $image, $date, $id)
     {
         $query = 'INSERT INTO ' . $this->table .
-            ' title, content, image, user_id' .
-            ' VALUES (:title, :content, :image, :id)';
+            ' (title, content, image, created_at, user_id)' .
+            ' VALUES (:title, :content, :image, :date, :id)';
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':content', $content);
         $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':date', $date);
         $stmt->bindParam(':id', $id);
+        $result = $stmt->execute();
+        if ($result) {
+            return true;
+        }
+        echo "Error happend during insertion operation";
+        return false;
     }
 }

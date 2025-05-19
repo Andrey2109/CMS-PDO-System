@@ -6,13 +6,20 @@ if (isPostRequest()) {
     $title = $_POST['title'];
     $content = $_POST['content'];
     $image = $_POST['image'];
+    $date = $_POST['date'];
+    $user_id = $_SESSION['user_id'];
+    $article = new Article();
+    if ($article->createArticle($title, $content, $image, $date, $user_id)) {
+        redirect('admin.php');
+    }
 }
+
 
 ?>
 
 <main class="container my-5">
     <h2>Create New Article</h2>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="title" class="form-label">Article Title *</label>
             <input name="title" type="text" class="form-control" id="title" placeholder="Enter article title" required>
