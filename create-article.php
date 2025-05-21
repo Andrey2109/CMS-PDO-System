@@ -30,7 +30,9 @@ if (isPostRequest()) {
         $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
 
         if (in_array($imageFileType, $allowedTypes)) {
-            echo 'we are here';
+
+            $uniqueFileName = uniqid() . "_" . time() . "." . $imageFileType;
+            $targetFile .= "_" . $uniqueFileName;
             if (move_uploaded_file($_FILES['image']["tmp_name"], $targetFile)) {
                 $imagePath = $targetFile;
                 echo $imagePath;
