@@ -43,21 +43,6 @@ $user_articles = $article_obj->getArticlesbyUser($_SESSION['user_id']);
                         </td>
                     </tr>
                 <?php endforeach; ?>
-                <!-- Additional Article Rows -->
-                <tr>
-                    <td>2</td>
-                    <td>Article Title 2</td>
-                    <td>Jose Diaz</td>
-                    <td>February 15, 2045</td>
-                    <td>
-                        Quisque fermentum, nisl a pulvinar tincidunt, nunc purus laoreet massa, nec tempor arcu urna vel nisi...
-                    </td>
-                    <td>
-                        <a href="edit-article.html?id=2" class="btn btn-sm btn-primary me-1">Edit</a>
-                        <button class="btn btn-sm btn-danger" onclick="confirmDelete(2)">Delete</button>
-                    </td>
-                </tr>
-                <!-- You can add more articles here -->
             </tbody>
         </table>
     </div>
