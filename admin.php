@@ -24,7 +24,8 @@ $user_articles = $article_obj->getArticlesbyUser($_SESSION['user_id']);
                     <th>Author</th>
                     <th>Published Date</th>
                     <th>Excerpt</th>
-                    <th>Actions</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,7 +40,12 @@ $user_articles = $article_obj->getArticlesbyUser($_SESSION['user_id']);
                         </td>
                         <td>
                             <a href="edit-article.html?id=<?= $article->id ?>" class="btn btn-sm btn-primary me-1">Edit</a>
-                            <button class="btn btn-sm btn-danger" onclick="confirmDelete(1)">Delete</button>
+                        </td>
+                        <td>
+                            <form method="POST" action="delete-article.php">
+                                <input type="hidden" name="article_id" value="<?= $article->id ?>">
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="confirmDelete(<?= $article->id ?>)">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 <?php endforeach; ?>

@@ -109,4 +109,20 @@ class Article
         echo "Error happend during insertion operation";
         return false;
     }
+    public function deleteArticle($id)
+    {
+        if (!empty($id)) {
+            $query = "DELETE FROM " . $this->table . " WHERE id=:id";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $result = $stmt->execute();
+            if ($result) {
+                return true;
+            }
+            echo "Error happend during insertion operation";
+            return false;
+        } else {
+            echo "No id found for the article";
+        }
+    }
 }
