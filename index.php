@@ -24,8 +24,7 @@ $articles = $article_obj->get_all();
                         <img
                             src="<?php echo htmlspecialchars($article->image); ?>"
                             class="img-fluid"
-                            alt="Blog Post Image"
-                            style="border-radius: 8px; height: 200px; width: 300px">
+                            alt="Blog Post Image">
 
 
                     <?php else: ?>

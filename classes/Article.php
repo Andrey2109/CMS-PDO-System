@@ -48,6 +48,7 @@ class Article
                 articles.content,
                 articles.created_at,
                 articles.image,
+                users.id AS owner,
                 users.username AS author,
                 users.email AS author_email
          FROM ' . $this->table .

@@ -5,7 +5,7 @@ include "./partials/admin/navbar.php";
 $article_obj = new Article();
 
 
-$user_articles = $article_obj->getArticlesbyUser($_SESSION['user_id']);
+$user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ? $article_obj->getArticlesbyUser($_SESSION['user_id']) : [];
 // var_dump($user_articles);
 
 ?>

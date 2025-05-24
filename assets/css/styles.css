@@ -9,3 +9,14 @@ footer{
 main.container{
     margin-bottom: 150px !important;
 }
+.img-fluid{
+    border-radius: 8px;
+    height: 200px;
+    width: 300px;
+    transition: all 0.5s ease;
+}
+.img-fluid:hover{
+    border-radius: 20px;
+    height: 202px;
+    width: 304px;
+}
