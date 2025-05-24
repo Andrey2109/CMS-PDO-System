@@ -25,6 +25,11 @@ if (isPostRequest()) {
         if ($article_obj->updateArticleById($_GET['id'], $title, $content, $image)) {
             redirect("edit_article.php?id=" .  $article->id);
         }
+    } else {
+        echo "<script>
+                    alert('Only the owner of the article can edit it');
+                    window.location.href = 'admin.php';
+                 </script>";
     }
 }
 

@@ -103,8 +103,6 @@ function uploadImage()
             $error = 'Only JPG, JPEG, PNG and GIF types are allowed';
             echo $error;
         }
-        if (strpos($_SERVER['PHP_SELF'], 'edit_article.php')) {
-            return $imagePath;
-        }
+        return $imagePath;
     }
 }

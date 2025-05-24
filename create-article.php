@@ -13,39 +13,8 @@ if (isPostRequest()) {
     $article = new Article();
 
 
-    $targetDir = 'uploads' .  DIRECTORY_SEPARATOR;
-    $imagePath = '';
-    $error = '';
+    $imagePath = uploadImage();
 
-
-    if (!is_dir($targetDir)) {
-        mkdir($targetDir, 0777, true);
-    }
-
-    if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
-        // var_dump($_FILES);
-        $targetFile = $targetDir . $_FILES['image']['name'];
-        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-
-        $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
-
-        if (in_array($imageFileType, $allowedTypes)) {
-
-            $uniqueFileName = uniqid() . "_" . time() . "." . $imageFileType;
-            $targetFile .= "_" . $uniqueFileName;
-            if (move_uploaded_file($_FILES['image']["tmp_name"], $targetFile)) {
-                $imagePath = $targetFile;
-                echo $imagePath;
-            } else {
-
-                $error = 'There was an error uploading the file';
-                echo $error;
-            }
-        } else {
-            $error = 'Only JPG, JPEG, PNG and GIF types are allowed';
-            echo $error;
-        }
-    }
     if ($article->createArticle($title, $content, $imagePath, $date, $user_id)) {
         redirect('admin.php');
     }
@@ -76,6 +45,7 @@ if (isPostRequest()) {
         <button type="submit" class="btn btn-success">Publish Article</button>
         <a href="admin.php" class="btn btn-secondary ms-2">Cancel</a>
     </form>
+    <div style="margin-bottom: 70px;"></div>
 </main>
 
 
