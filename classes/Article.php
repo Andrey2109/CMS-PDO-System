@@ -126,4 +126,21 @@ class Article
             echo "No id found for the article";
         }
     }
+    public function updateArticleById($id, $title, $content, $image)
+    {
+        $query = 'UPDATE ' . $this->table .
+            " SET title = :title, content = :content, image = :image" .
+            " WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':content', $content);
+        $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':id', $id);
+        $result = $stmt->execute();
+        if ($result) {
+            return true;
+        }
+        echo "Error happened during update operation";
+        return false;
+    }
 }

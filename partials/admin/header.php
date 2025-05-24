@@ -14,6 +14,7 @@ isLoggedIn();
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
         rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
 
     <style>
         /* Make sure the html and body take up the full height */

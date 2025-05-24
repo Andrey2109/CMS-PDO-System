@@ -3,12 +3,15 @@ footer{
     bottom: 0;
     height: 75px;
     width: 100%;
+    padding-top: 100px;
     margin-top: 100px;
 }
+
 
 main.container{
     margin-bottom: 150px !important;
 }
+
 .img-fluid{
     border-radius: 8px;
     height: 200px;
@@ -19,4 +22,9 @@ main.container{
     border-radius: 20px;
     height: 202px;
     width: 304px;
+}
+.img-fluid-small{
+    border-radius: 8px;
+    height: 100px;
+    width: 150px;
 }

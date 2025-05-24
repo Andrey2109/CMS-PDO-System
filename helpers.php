@@ -67,3 +67,44 @@ function isLoggedIn()
         redirect('login.php');
     }
 }
+function uploadImage()
+{
+    $targetDir = 'uploads' .  DIRECTORY_SEPARATOR;
+    $imagePath = '';
+    $error = '';
+
+
+    if (!strpos($_SERVER['PHP_SELF'], 'edit_article.php')) {
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0777, true);
+        }
+    }
+
+
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
+        // var_dump($_FILES);
+        $targetFile = $targetDir . $_FILES['image']['name'];
+        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+        $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+
+        if (in_array($imageFileType, $allowedTypes)) {
+
+            $uniqueFileName = uniqid() . "_" . time() . "." . $imageFileType;
+            $targetFile .= "_" . $uniqueFileName;
+            if (move_uploaded_file($_FILES['image']["tmp_name"], $targetFile)) {
+                $imagePath = $targetFile;
+            } else {
+
+                $error = 'There was an error uploading the file';
+                echo $error;
+            }
+        } else {
+            $error = 'Only JPG, JPEG, PNG and GIF types are allowed';
+            echo $error;
+        }
+        if (strpos($_SERVER['PHP_SELF'], 'edit_article.php')) {
+            return $imagePath;
+        }
+    }
+}

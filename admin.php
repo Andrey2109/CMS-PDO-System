@@ -39,7 +39,7 @@ $user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ?
                             <?= $article_obj->getProperLength($article->content)  ?>
                         </td>
                         <td>
-                            <a href="edit-article.html?id=<?= $article->id ?>" class="btn btn-sm btn-primary me-1">Edit</a>
+                            <a href="edit_article.php?id=<?= $article->id ?>" class="btn btn-sm btn-primary me-1">Edit</a>
                         </td>
                         <td>
                             <form method="POST" action="delete-article.php">
