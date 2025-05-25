@@ -11,6 +11,7 @@ if (isset($article->image)) {
 if (isPostRequest()) {
     $title = $_POST['title'];
     $content = $_POST['content'];
+    $date = $_POST["date"];
     $owner_of_the_article = $article->owner == $_SESSION['user_id'];
     if ($owner_of_the_article) {
         if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
@@ -22,7 +23,7 @@ if (isPostRequest()) {
             $imagePath = uploadImage();
         }
         $image = isset($imagePath) ? $imagePath : $articleImage;
-        if ($article_obj->updateArticleById($_GET['id'], $title, $content, $image)) {
+        if ($article_obj->updateArticleById($_GET['id'], $title, $content, $image, $date)) {
             redirect("edit_article.php?id=" .  $article->id);
         }
     } else {
@@ -42,29 +43,25 @@ if (isPostRequest()) {
     <form method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="title" class="form-label">Article Title *</label>
-            <input name="title" type="text" class="form-control" id="title" value="<?= !empty($article->title) ? $article->title : 'No Title'; ?>" required>
+            <input name="title" type="text" class="form-control" id="title" value="<?= !empty($article->title) ? htmlspecialchars($article->title) : 'No Title'; ?>" required>
         </div>
         <div class="mb-3">
             <label for="author" class="form-label">Author *</label>
-            <input type="text" class="form-control" id="author" disabled value="<?= !empty($article->author) ? $article->author : 'No author\'s name'; ?>" required>
+            <input type="text" class="form-control" id="author" disabled value="<?= !empty($article->author) ? htmlspecialchars($article->author) : 'No author\'s name'; ?>" required>
         </div>
         <div class="mb-3">
             <label for="date" class="form-label">Published Date *</label>
-            <input type="date" class="form-control" id="date" value="<?= date('Y-m-d', strtotime($article->created_at)); ?>" required>
-        </div>
-        <div class="mb-3">
-            <label for="excerpt" class="form-label">Excerpt *</label>
-            <textarea class="form-control" id="excerpt" rows="3" required>Current article excerpt...</textarea>
+            <input name="date" type="date" class="form-control" id="date" value="<?= htmlspecialchars(date('Y-m-d', strtotime($article->created_at))); ?>" required>
         </div>
         <div class="mb-3">
             <label for="content" class="form-label">Content *</label>
-            <textarea name="content" class="form-control" id="content" rows="10" required><?= !empty($article->content) ? $article->content : 'No content specified'; ?></textarea>
+            <textarea name="content" class="form-control" id="content" rows="10" required><?= !empty($article->content) ? htmlspecialchars($article->content) : 'No content specified'; ?></textarea>
         </div>
         <div class="mb-3">
             <?php if (!empty($article->image)): ?>
                 <small>Current file: <?php echo $article->image ?> </small></br>
             <?php else: ?>
-                <small>No image exists</small>
+                <small>No image exists</small><br>
             <?php endif; ?>
             <?php if (file_exists($article->image)): ?>
                 <small>Current image:</small><br>
@@ -74,8 +71,11 @@ if (isPostRequest()) {
             <?php endif; ?>
 
             <label for="file" class="form-label">Featured Image URL</label>
-            <small>(Choose a new image in order to change the current one)</small>
+            <?php if (!empty($article->image)): ?>
+                <small>(Choose a new image in order to change the current one)</small>
+            <?php endif; ?>
             <input name="image" type="file" class="form-control" id="image">
+
         </div>
         <button type="submit" class="btn btn-primary">Update Article</button>
         <a href="admin.html" class="btn btn-secondary ms-2">Cancel</a>

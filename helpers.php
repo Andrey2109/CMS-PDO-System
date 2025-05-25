@@ -67,11 +67,17 @@ function isLoggedIn()
         redirect('login.php');
     }
 }
+function isLoggedInSimple()
+{
+
+    if (isset($_SESSION['user_id'])) {
+        return true;
+    }
+    return false;
+}
 function uploadImage()
 {
     $targetDir = 'uploads' .  DIRECTORY_SEPARATOR;
-    $imagePath = '';
-    $error = '';
 
 
     if (!strpos($_SERVER['PHP_SELF'], 'edit_article.php')) {
@@ -93,16 +99,13 @@ function uploadImage()
             $uniqueFileName = uniqid() . "_" . time() . "." . $imageFileType;
             $targetFile .= "_" . $uniqueFileName;
             if (move_uploaded_file($_FILES['image']["tmp_name"], $targetFile)) {
-                $imagePath = $targetFile;
+                return $targetFile;
             } else {
 
-                $error = 'There was an error uploading the file';
-                echo $error;
+                return 'There was an error uploading the file';
             }
         } else {
-            $error = 'Only JPG, JPEG, PNG and GIF types are allowed';
-            echo $error;
+            return 'Only JPG, JPEG, PNG and GIF types are allowed';
         }
-        return $imagePath;
     }
 }

@@ -126,16 +126,17 @@ class Article
             echo "No id found for the article";
         }
     }
-    public function updateArticleById($id, $title, $content, $image)
+    public function updateArticleById($id, $title, $content, $image, $date)
     {
         $query = 'UPDATE ' . $this->table .
-            " SET title = :title, content = :content, image = :image" .
+            " SET title = :title, content = :content, image = :image, created_at = :date" .
             " WHERE id = :id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':content', $content);
-        $stmt->bindParam(':image', $image);
-        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':image', $image, PDO::PARAM_STR);
+        $stmt->bindParam(':date', $date);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $result = $stmt->execute();
         if ($result) {
             return true;
