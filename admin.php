@@ -14,6 +14,10 @@ $user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ?
 <main class="container my-5">
     <h2 class="mb-4">Welocme <?= $_SESSION['username'] ?> to your Admin page</h2>
 
+    <form action="create_dummy_data.php" method="POST">
+        <button class="btn btn-primary mb-3" type="submit">Gnerate Articles</button>
+    </form>
+
     <!-- Articles Table -->
     <div class="table-responsive">
         <table class="table table-bordered table-hover align-middle">

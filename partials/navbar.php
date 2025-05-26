@@ -1,7 +1,7 @@
 <!-- Navigation Bar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">CMS PDO System</a>
+        <a class="navbar-brand" href="index.php">CMS PDO System</a>
         <button
             class="navbar-toggler"
             type="button"

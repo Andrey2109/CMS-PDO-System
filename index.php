@@ -21,18 +21,19 @@ $articles = $article_obj->get_all();
             <div class="row mb-4">
                 <div class="col-md-4">
                     <?php if (!empty($article->image)): ?>
-                        <img
-                            src="<?php echo htmlspecialchars($article->image); ?>"
-                            class="img-fluid"
-                            alt="Blog Post Image">
-
-
+                        <a href="article.php?id=<?php echo $article->id ?>">
+                            <img
+                                src="<?php echo htmlspecialchars($article->image); ?>"
+                                class="img-fluid"
+                                alt="Blog Post Image">
+                        </a>
                     <?php else: ?>
-                        <img
-                            src="https://via.placeholder.com/350x200"
-                            class="img-fluid"
-                            alt="Blog Post Image">
-
+                        <a href="article.php?id=<?php echo $article->id ?>">
+                            <img
+                                src="https://via.placeholder.com/350x200"
+                                class="img-fluid"
+                                alt="Blog Post Image">
+                        </a>
                     <?php endif; ?>
                 </div>
                 <div class="col-md-8">

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">CMS PDO System - Admin</a>
+        <a class="navbar-brand" href="index.php">CMS PDO System - Admin</a>
         <button
             class="navbar-toggler"
             type="button"

@@ -144,4 +144,10 @@ class Article
         echo "Error happened during update operation";
         return false;
     }
+
+    public function generateDummyData($num = 10)
+    {
+        $query = "INSERT INTO" . $this->table . " (title, content, user_id, created_at, image)
+        VALUES  (:title, :content, :user_id, :created_at, :image)";
+    }
 }

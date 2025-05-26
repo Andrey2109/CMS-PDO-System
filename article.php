@@ -61,7 +61,7 @@ $article = $article_obj->get_article_with_owner_by_id($articleId);
 
     <!-- Back to Home Button -->
     <div class="mt-4">
-        <a href="index.html" class="btn btn-secondary">← Back to Home</a>
+        <a href="<?php echo baseUrl('index.php') ?>" class="btn btn-secondary">← Back to Home</a>
     </div>
 </main>
 
