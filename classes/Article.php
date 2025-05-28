@@ -149,5 +149,36 @@ class Article
     {
         $query = "INSERT INTO" . $this->table . " (title, content, user_id, created_at, image)
         VALUES  (:title, :content, :user_id, :created_at, :image)";
+
+        $stmt = $this->conn->prepare($query);
+        $dummy_titles = [
+            "The Future of Web Development: Trends to Watch in 2025",
+            "Building Scalable Applications with Modern PHP",
+            "Understanding Database Design Principles",
+            "Creating Responsive User Interfaces with CSS Grid",
+            "JavaScript Frameworks: A Comprehensive Comparison",
+            "Security Best Practices for Web Applications",
+            "The Rise of AI in Software Development",
+            "Performance Optimization Techniques for Websites",
+            "Version Control Mastery: Git Tips and Tricks",
+            "API Design Patterns for Modern Applications"
+        ];
+
+        $dummy_content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.";
+
+        $dummy_image = 'https://picsum.photos/200/300';
+        $user_id = 26;
+        $created_at = date('Y-m-d H:i:s');
+
+        for ($i = 0; $i < $num; $i++) {
+            $title = $dummy_titles[array_rand($dummy_titles)];
+            $stmt->bindParam(':title', $title);
+            $stmt->bindParam(':content', $dummy_content);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->bindParam(':image', $dummy_image);
+            $stmt->bindParam(':created_at', $created_at);
+
+            $stmt->execute();
+        }
     }
 }
