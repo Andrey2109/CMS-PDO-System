@@ -33,7 +33,7 @@ function uploadsURL($filepath)
 
 function assetsURL($filepath)
 {
-    return basePath('ussets/' . ltrim($filepath, '/'));
+    return basePath('assets/' . ltrim($filepath, '/'));
 }
 
 function redirect($url)

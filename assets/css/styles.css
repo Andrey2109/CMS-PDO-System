@@ -6,6 +6,10 @@ footer{
     margin-top: 100px;
 }
 
+.table-margin{
+    margin-bottom: 100px !important;
+}
+
 
 main.container{
     margin-bottom: 150px !important;

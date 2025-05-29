@@ -20,7 +20,7 @@ $user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ?
 
     <!-- Articles Table -->
     <div class="table-responsive">
-        <table class="table table-bordered table-hover align-middle">
+        <table class="table table-bordered table-hover align-middle table-margin">
             <thead class="table-dark">
                 <tr>
                     <th>ID</th>
@@ -56,6 +56,7 @@ $user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ?
             </tbody>
         </table>
     </div>
+    <!-- <div class="table-margin"></div> -->
 </main>
 
 
