@@ -13,10 +13,20 @@ $user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ?
 <!-- Main Content -->
 <main class="container my-5">
     <h2 class="mb-4">Welocme <?= $_SESSION['username'] ?> to your Admin page</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <form class="d-flex align-items-center" action="create_dummy_data.php" method="POST">
+            <label class="form-label" for="ArticleCount">Number of articles</label>
+            <input style="width: 70px; margin: 0 10px" class="form-control" name="article_count" type="number" min="0" />
+            <button id="ArticleCount" class="btn btn-primary " type="submit">Gnerate Articles</button>
+        </form>
+        <form method="POST">
+            <button name="reorder_articles" class="btn btn-warning" type="submit">Reorder Articles</button>
+        </form>
 
-    <form action="create_dummy_data.php" method="POST">
-        <button class="btn btn-primary mb-3" type="submit">Gnerate Articles</button>
-    </form>
+        <button id="deleteSelectedBtn" class="btn btn-danger">Delete Selected Articles</button>
+
+    </div>
+
 
     <!-- Articles Table -->
     <div class="table-responsive">
