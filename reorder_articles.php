@@ -4,8 +4,8 @@ require "init.php";
 
 if (isPostRequest()) {
     $article = new Article();
-    $num_of_articles = $_POST['article_count'];
-    if ($article->generateDummyData($num_of_articles)) {
+    if ($article->reorderAndResetAutoIncrement()) {
         redirect('admin.php');
-    }
+    };
+    // $article->reorderAndResetAutoIncrement();
 }

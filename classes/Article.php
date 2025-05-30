@@ -189,4 +189,29 @@ class Article
             return false;
         }
     }
+    public function reorderAndResetAutoIncrement()
+    {
+        try {
+
+            $this->conn->beginTransaction();
+            $query = "SELECT id FROM " . $this->table;
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            $articles = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+            $newId = 1;
+            foreach ($articles as $article) {
+                $updateQuery = "UPDATE " . $this->table . " SET id = $newId WHERE id = :id";
+                $updateStmt = $this->conn->prepare($updateQuery);
+                $updateStmt->bindParam('id', $article->id, PDO::PARAM_INT);
+                $updateStmt->execute();
+                $newId++;
+            }
+            $this->conn->commit();
+            return true;
+        } catch (Exception $exeption) {
+            $this->conn->rollBack();
+            throw $exeption;
+        }
+    }
 }
