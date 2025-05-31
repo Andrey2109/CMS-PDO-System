@@ -15,16 +15,19 @@ main.container{
     margin-bottom: 150px !important;
 }
 
+
 .img-fluid{
     border-radius: 8px;
     height: 200px;
     width: 300px;
     transition: all 0.2s ease;
 }
+/* .col-md-4 {
+    overflow: hidden; 
+} */
 .img-fluid:hover{
     border-radius: 20px;
-    height: 202px;
-    width: 304px;
+    transform: scale(1.03);
 }
 .img-fluid-small{
     border-radius: 8px;
