@@ -86,7 +86,19 @@ $user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ?
         checkboxes.forEach((checkbox) => {
             checkBoxesIds.push(checkbox.value)
         })
-        console.log(checkBoxesIds)
+
+        if (checkBoxesIds.length == 0) {
+            alert('Select at least 1 article')
+            return;
+        }
+
+        if (confirm('Are you sure you want to delete this article?')) {
+            sendDeleteRequest(checkBoxesIds)
+        }
+
+        function sendDeleteRequest(checkBoxesIds) {
+
+        }
     }
 </script>
 
