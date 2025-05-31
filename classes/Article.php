@@ -207,7 +207,16 @@ class Article
                 $updateStmt->execute();
                 $newId++;
             }
+
             $this->conn->commit();
+
+            $newAutoIncrementid = $newId;
+            $resetIncrementQuery = "ALTER TABLE " . $this->table . " AUTO_INCREMENT = :next_autoincrement_id";
+            $resetIncrementStmt = $this->conn->prepare($resetIncrementQuery);
+            $resetIncrementStmt->bindParam('next_autoincrement_id', $newAutoIncrementid, PDO::PARAM_INT);
+            $resetIncrementStmt->execute();
+
+
             return true;
         } catch (Exception $exeption) {
             $this->conn->rollBack();

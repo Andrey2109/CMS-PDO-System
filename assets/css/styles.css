@@ -19,7 +19,7 @@ main.container{
     border-radius: 8px;
     height: 200px;
     width: 300px;
-    transition: all 0.5s ease;
+    transition: all 0.2s ease;
 }
 .img-fluid:hover{
     border-radius: 20px;
