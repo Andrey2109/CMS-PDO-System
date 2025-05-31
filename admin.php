@@ -35,6 +35,7 @@ $user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ?
         <table class="table table-bordered table-hover align-middle table-margin">
             <thead class="table-dark">
                 <tr>
+                    <th><input type="checkbox" id="selectAll"></th>
                     <th>ID</th>
                     <th>Title</th>
                     <th>Author</th>
@@ -47,6 +48,7 @@ $user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ?
             <tbody>
                 <?php foreach ($user_articles as $article): ?>
                     <tr>
+                        <td><input type="checkbox" class="articleCheckbox" value="<?= $article->id ?>"></td>
                         <td><?= $article->id ?></td>
                         <td><?= $article->title ?></td>
                         <td><?= $article->first_name . ' ' . $article->last_name ?></td>
@@ -70,6 +72,23 @@ $user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ?
     </div>
     <!-- <div class="table-margin"></div> -->
 </main>
+
+<script>
+    document.getElementById('selectAll').onclick = function() {
+        let checkboxes = document.querySelectorAll('.articleCheckbox')
+        for (let checkbox of checkboxes) {
+            checkbox.checked = this.checked;
+        }
+    }
+    document.getElementById('deleteSelectedBtn').onclick = function() {
+        let checkboxes = document.querySelectorAll('.articleCheckbox:checked')
+        let checkBoxesIds = [];
+        checkboxes.forEach((checkbox) => {
+            checkBoxesIds.push(checkbox.value)
+        })
+        console.log(checkBoxesIds)
+    }
+</script>
 
 
 <?php
