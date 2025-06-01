@@ -43,6 +43,7 @@ $user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ?
                     <th>Excerpt</th>
                     <th>Edit</th>
                     <th>Delete</th>
+                    <th>Ajax Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,6 +65,9 @@ $user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ?
                                 <input type="hidden" name="article_id" value="<?= $article->id ?>">
                                 <button type="submit" class="btn btn-sm btn-danger" onclick="confirmDelete(<?= $article->id ?>)">Delete</button>
                             </form>
+                        </td>
+                        <td>
+                            <button data-id="<?= $article->id ?>" style="white-space: nowrap;" type="submit" class="btn btn-sm btn-danger delete-single">Ajax Delete</button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -96,9 +100,37 @@ $user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ?
             sendDeleteRequest(checkBoxesIds)
         }
 
-        function sendDeleteRequest(checkBoxesIds) {
 
+
+
+    }
+    document.querySelectorAll('.delete-single').forEach((button) => {
+        button.onclick = function() {
+            let articleId = this.getAttribute('data-id')
+            if (confirm('Are you sure you want to delete article' + articleId + '?')) {
+                sendDeleteRequest(articleId)
+            }
         }
+    })
+
+    function sendDeleteRequest(Ids) {
+        let xhr = new XMLHttpRequest;
+        xhr.open('POST', '<?= baseUrl('delete-articles.php') ?>')
+        xhr.setRequestHeader('Content-Type', 'application/json')
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText)
+
+                if (response.success) {
+                    alert('We did it and articles got deleted')
+                } else {
+                    alert('Failed delete the article' + response.message)
+                }
+            }
+        }
+        xhe.send(JSON.stringify({
+            articleIds: Ids
+        }))
     }
 </script>
 
