@@ -128,7 +128,7 @@ $user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ?
                 }
             }
         }
-        xhe.send(JSON.stringify({
+        xhr.send(JSON.stringify({
             articleIds: Ids
         }))
     }
