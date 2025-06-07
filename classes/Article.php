@@ -120,7 +120,7 @@ class Article
             if ($result) {
                 return true;
             }
-            echo "Error happend during insertion operation";
+            echo "Error happend during delete operation";
             return false;
         } else {
             echo "No id found for the article";
@@ -223,4 +223,5 @@ class Article
             throw $exeption;
         }
     }
+    public function deleteMultiple($Ids) {}
 }

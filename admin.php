@@ -107,7 +107,7 @@ $user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ?
     document.querySelectorAll('.delete-single').forEach((button) => {
         button.onclick = function() {
             let articleId = this.getAttribute('data-id')
-            if (confirm('Are you sure you want to delete article' + articleId + '?')) {
+            if (confirm('Are you sure you want to delete article ' + articleId + '?')) {
                 sendDeleteRequest(articleId)
             }
         }
@@ -120,7 +120,6 @@ $user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ?
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let response = JSON.parse(xhr.responseText)
-
                 if (response.success) {
                     alert('We did it and articles got deleted')
                 } else {
