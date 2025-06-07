@@ -121,7 +121,7 @@ $user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ?
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let response = JSON.parse(xhr.responseText)
                 if (response.success) {
-                    alert('We did it and articles got deleted')
+                    alert('We did it, and articles got deleted')
                     location.reload()
                 } else {
                     alert('Failed delete the article' + response.message)
