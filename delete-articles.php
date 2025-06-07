@@ -6,7 +6,7 @@ $response = ['success' => false, 'message' => ''];
 
 if (isPostRequest()) {
     $data = json_decode(file_get_contents('php://input'), true);
-    if (isset($data['articleIds']) && $data['articleIds']) {
+    if (isset($data['articleIds']) && is_array($data['articleIds'])) {
         $articleIds = $data['articleIds'];
         try {
             $article = new Article();
@@ -15,5 +15,10 @@ if (isPostRequest()) {
         } catch (Exception $e) {
             $response['message'] = "Error: " . $e->getMessage();
         }
+    } else {
+        $response['message'] = 'No articles Ids were provided';
     }
+} else {
+    $response['message'] = "Invalid request method";
 }
+echo json_encode($response);

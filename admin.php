@@ -108,7 +108,7 @@ $user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ?
         button.onclick = function() {
             let articleId = this.getAttribute('data-id')
             if (confirm('Are you sure you want to delete article ' + articleId + '?')) {
-                sendDeleteRequest(articleId)
+                sendDeleteRequest([articleId])
             }
         }
     })
@@ -122,6 +122,7 @@ $user_articles = !empty($article_obj->getArticlesbyUser($_SESSION['user_id'])) ?
                 let response = JSON.parse(xhr.responseText)
                 if (response.success) {
                     alert('We did it and articles got deleted')
+                    location.reload()
                 } else {
                     alert('Failed delete the article' + response.message)
                 }

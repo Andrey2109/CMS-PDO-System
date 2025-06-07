@@ -223,5 +223,11 @@ class Article
             throw $exeption;
         }
     }
-    public function deleteMultiple($Ids) {}
+    public function deleteMultiple($Ids)
+    {
+        $placeholders = implode(",", array_fill(0, count($Ids), '?'));
+        $query = "DELETE FROM " . $this->table . " WHERE id IN ($placeholders)";
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute($Ids);
+    }
 }
